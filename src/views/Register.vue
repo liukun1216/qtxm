@@ -27,7 +27,7 @@
         </el-form-item>
 
         <el-form-item label="地址">
-          <el-cascader :options="options" ref="cascaderDay" @change="abc" >
+          <el-cascader :v-model="form.address" :options="options" ref="cascaderDay" @change="abc" >
             <template slot-scope="{ node, data }">
               <span>{{ data.label }}</span>
               <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
@@ -36,6 +36,7 @@
           <!-- <el-cascader :v-model="form.address" :options="options" clearable @change="abc"></el-cascader> -->
         </el-form-item>
         <el-button type="primary" @click="reGister">确定注册</el-button>
+        <el-button type="primary" @click="Out">回到主页</el-button>
       </el-form>
     </div>
   </div>
@@ -99,20 +100,25 @@
     methods: {
       reGister:function() {
         var url = this.axios.urls.SYS_USER_RS_AD;
-        debugger;
         console.log(url);
         this.axios.post(url, this.form).then(resp=>{
           console.log(resp);
           this.$message({
-            message: "注册成功",
+            message: resp.data.message,
             type: 'success'
           });
+          this.$router.push({
+            path:"/Idex",
+            query:{
+              account:this.form.account,
+              username:this.form.username
+            }
+          })
         }).catch(resp=>{
           console.log(resp);
         });
       },
       abc:function(val) {
-        debugger;
         var labelList = [];
         var checkLabels = this.$refs['cascaderDay'].getCheckedNodes();
         checkLabels.forEach(function(item) {
@@ -120,11 +126,23 @@
                 labelList.push(item.label);
             }
         })
-        
         // this.form.dayWorkerLocation = nowData.join(",");
         // this.form.dayWorker = labelList.join(",");
-
+        this.form.address = labelList.join(",");
         console.log(val);
+      },
+      Out:function(){
+        this.$router.push("/Idex");
+      },
+      RsLogin:function(){
+        this.$router.push({
+          path:"/Idex",
+          query:{
+            account:this.form.account,
+            username:this.form.username
+
+          }
+        })
       }
     }
 

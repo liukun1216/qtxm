@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/views/Login.vue'
 import Idex from '@/views/Idex.vue'
 import Register from '@/views/Register.vue'
+import Personal from '@/views/Personal.vue'
 
 Vue.use(Router)
 
@@ -11,8 +12,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: 'Idex',
+      component: Idex
     },
     {
       path: '/Login',
@@ -28,6 +29,11 @@ export default new Router({
       path: '/Register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/Personal',
+      name: 'Personal',
+      component: Personal
     }
   ]
 })

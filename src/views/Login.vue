@@ -10,7 +10,6 @@
           <el-input v-model="form.password" placeholder="请输入密码"></el-input>
         </el-form-item>
             <el-button type="primary" @click="onSubmit" style="width: 100%;">登陆</el-button>
-            <!-- <el-button style="margin-top: 5px;float: right;" @click="toreGister">免费注册</el-button> -->
             <el-link @click="toreGister" style="margin-top: 5px;float: right;" target="_blank">免费注册</el-link>
       </el-form>
     </div>
@@ -33,10 +32,21 @@
        onSubmit:function(){
           var url = this.axios.urls.SYS_USER_LOGIN;
             console.log(url);
-            debugger;
            this.axios.post(url,this.form).then(resp=>{
               console.log(resp);
-              this.$router.push("/Idex");
+              debugger
+              if(resp.data.code==0){
+                console.log(resp.data.result.username);
+                this.$router.push({
+                  path:"/Idex",
+                  query:{
+                    username:resp.data.result.username
+                  },
+                });
+              }else{
+                this.$message.error(resp.data.message);
+              }
+
            }).catch(resp=>{
                console.log(resp);
                 this.$message.error('登陆失败');
