@@ -1,60 +1,76 @@
 <template>
- <div class="login-wrap">
+  <div class="login-wrap">
     <div class="login-container">
       <el-form ref="form" :model="form" label-width="0px">
-         <div class="title">{{msg}}</div>
-        <el-form-item class="">
-          <el-input v-model="form.account" placeholder="账号/手机号" ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input v-model="form.password" placeholder="请输入密码"></el-input>
-        </el-form-item>
-            <el-button type="primary" @click="onSubmit" style="width: 100%;">登陆</el-button>
-            <el-link @click="toreGister" style="margin-top: 5px;float: right;" target="_blank">免费注册</el-link>
+        <div class="title">
+          <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+            <el-tab-pane label="账号登录" name="first">
+              <el-form-item class="">
+                <el-input v-model="form.account" placeholder="账号名"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+              </el-form-item>
+              <el-button type="primary" @click="onSubmit" style="width: 100%;">登陆</el-button>
+            </el-tab-pane>
+            <el-tab-pane label="手机号登录" name="second">
+              <el-form-item class="">
+                <el-input v-model="form.phone" placeholder="手机号"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+              </el-form-item>
+              <el-button type="primary" @click="onSubmit" style="width: 100%;">登陆</el-button>
+            </el-tab-pane>
+            </el-tab-pane>
+          </el-tabs>
+          <el-link @click="toreGister" style="margin-top: 5px;float: right;" target="_blank">免费注册</el-link>
+        </div>
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
-  export default{
+  export default {
     name: 'HelloWorld',
     data() {
       return {
-        msg:"用户登录",
+        activeName: 'first',
         form: {
-          account: 'zs',
-          password: '123'
+          account: '',
+          password: '',
+          phone:''
         },
       }
     },
-    methods:{
-       onSubmit:function(){
-          var url = this.axios.urls.SYS_USER_LOGIN;
-            console.log(url);
-           this.axios.post(url,this.form).then(resp=>{
-              console.log(resp);
-              debugger
-              if(resp.data.code==0){
-                console.log(resp.data.result.username);
-                this.$router.push({
-                  path:"/Idex",
-                  query:{
-                    username:resp.data.result.username
-                  },
-                });
-              }else{
-                this.$message.error(resp.data.message);
-              }
+    methods: {
+      onSubmit: function() {
+        var url = this.axios.urls.SYS_USER_LOGIN;
 
-           }).catch(resp=>{
-               console.log(resp);
-                this.$message.error('登陆失败');
-           });
-       },
-       toreGister:function(){
-         this.$router.push("/Register");
-       }
+        this.axios.post(url, this.form).then(resp => {
+          console.log(resp);
+          if (resp.data.code == 0) {
+            console.log(resp.data.result.username);
+            this.$router.push({
+              path: "/Idex",
+              query: {
+                username: resp.data.result.username,
+                account: resp.data.result.account
+              },
+            });
+          } else {
+            this.$message.error(resp.data.message);
+          }
+
+        }).catch(resp => {
+          console.log(resp);
+          this.$message.error('登陆失败');
+        });
+      },
+      toreGister: function() {
+        this.$router.push("/Register");
+      }
 
     }
 
@@ -62,7 +78,6 @@
 </script>
 
 <style>
-
   <style scoped>.login-wrap {
     box-sizing: border-box;
     width: 100%;

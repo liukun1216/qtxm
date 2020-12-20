@@ -7,7 +7,7 @@ export default {
   'SERVER': 'http://localhost:8080/ssmht/', //服务器
   'SYS_USER_LOGIN':'/login',//登录
   'SYS_USER_RS_AD':'/RsAndAd',//新增and修改
-  'SYS_ACCOUONT_PHONE':'/listByAccountAndPhone',
+  'SYS_ACCOUONT_PHONE':'/listByAccountAndPhone',//通过账号or手机号查
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
     return this.SERVER + this[k];
   }

@@ -27,7 +27,7 @@
         </el-form-item>
 
         <el-form-item label="地址">
-          <el-cascader :v-model="form.address" :options="options" ref="cascaderDay" @change="abc" >
+          <el-cascader :v-model="form.address" :options="options" ref="cascaderDay" @change="abc">
             <template slot-scope="{ node, data }">
               <span>{{ data.label }}</span>
               <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
@@ -47,11 +47,11 @@
     name: 'HelloWorld',
     data() {
       return {
-        form:{
+        form: {
           account: '', //账号
           username: '', //昵称
           password: '', //密码
-          realname:'',//真实姓名
+          realname: '', //真实姓名
           // idcard:'',//身份证号
           phone: '', //联系电话
           email: '', //邮箱
@@ -98,48 +98,48 @@
       }
     },
     methods: {
-      reGister:function() {
+      reGister: function() {
         var url = this.axios.urls.SYS_USER_RS_AD;
         console.log(url);
-        this.axios.post(url, this.form).then(resp=>{
+        this.axios.post(url, this.form).then(resp => {
           console.log(resp);
           this.$message({
             message: resp.data.message,
             type: 'success'
           });
           this.$router.push({
-            path:"/Idex",
-            query:{
-              account:this.form.account,
-              username:this.form.username
+            path: "/Idex",
+            query: {
+              account: this.form.account,
+              username: this.form.username
             }
           })
-        }).catch(resp=>{
+        }).catch(resp => {
           console.log(resp);
         });
       },
-      abc:function(val) {
+      abc: function(val) {
         var labelList = [];
         var checkLabels = this.$refs['cascaderDay'].getCheckedNodes();
         checkLabels.forEach(function(item) {
-            if(!item.hasChildren) {
-                labelList.push(item.label);
-            }
+          if (!item.hasChildren) {
+            labelList.push(item.label);
+          }
         })
         // this.form.dayWorkerLocation = nowData.join(",");
         // this.form.dayWorker = labelList.join(",");
         this.form.address = labelList.join(",");
         console.log(val);
       },
-      Out:function(){
+      Out: function() {
         this.$router.push("/Idex");
       },
-      RsLogin:function(){
+      RsLogin: function() {
         this.$router.push({
-          path:"/Idex",
-          query:{
-            account:this.form.account,
-            username:this.form.username
+          path: "/Idex",
+          query: {
+            account: this.form.account,
+            username: this.form.username
 
           }
         })
