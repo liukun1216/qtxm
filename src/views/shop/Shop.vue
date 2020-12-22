@@ -19,19 +19,22 @@
         </div>
       </el-col>
     </el-row>
-    
+
     <div class="" id="box">
-    		<ul>
-    			<li v-for="v in list">
-    				<img v-bind:src="v.src" alt="">
-    				<h4>{{v.des}}</h4>
-    				<p>{{v.price}}</p>
-    			</li>
-    		</ul>
-    	</div>
+      <ul>
+        <li v-for="v in list">
+          <div>
+
+          <img v-bind:src="v.image" alt="">
+          <h4><el-link :underline="false" @clic="spxq(v.id)">{{v.name}}</el-link> </h4>
+          <p>{{v.price}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
- 
+
 </template>
 
 <script>
@@ -43,57 +46,32 @@
         input2: '',
         input3: '',
         select: '',
-        list: [{
-            src: 'images/1.jpg',
-            des: '这是第一个描述',
-            price: 198
-          },
-          {
-            src: 'images/2.jpg',
-            des: '这是第二个描述',
-            price: 198
-          },
-          {
-            src: 'images/3.jpg',
-            des: '这是第三个描述',
-            price: 211
-          },
-          {
-            src: 'images/1.jpg',
-            des: '这是第一个描述',
-            price: 198
-          },
-          {
-            src: 'images/3.jpg',
-            des: '这是第二个描述',
-            price: 112
-          },
-          {
-            src: 'images/3.jpg',
-            des: '这是第三个描述',
-            price: 423
-          }
-        ]
+        list: []
 
       }
     },
+    methods:{
+      spxq:function(id){
+        console.log(id);
+      }
+
+    }    ,
     created: function() {
-      //     var url = this.axios.urls.Shop;
-      //      this.axios.post(url).then(resp=>{
-      //        console.log(resp.data.code);
-      //        var c=resp.data.code;
-      //        this.tableData3=resp.data.result;
-      //       if(c>=0){
-
-      //       }
-      //         console.log(resp);
+      var data = {
+        shopId: this.$route.query.id,
+      }
+      var url = this.axios.urls.ShopCommodity;
+      this.axios.post(url, data).then(resp => {
+        this.list=resp.data.result;
+        console.log(resp);
 
 
-      //      }).catch(resp=>{
-      //          console.log(resp);
-      //           this.$message.error('登陆失败');
-      //      });
-      //     console.log(123);
+
+
+      }).catch(resp => {
+        console.log(resp);
+      });
+      console.log(123);
     }
   }
 </script>

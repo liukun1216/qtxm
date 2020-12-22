@@ -11,8 +11,10 @@ export default {
   'Admin_Login':'/admin/login',//管理员登录
   'Admin_Log':'/admin/getLog',//查询日志
   'Admin_Shop':'/admin/getShop',//查询店铺
+  'Admin_ShopDudit':'/admin/ShopDudit',//查询店铺
   'AddShop':'/shop/add',//添加店铺
   'Shop':'/shop/index',//店铺首页
+  'ShopCommodity':'/shop/commodity',//店铺商品
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
     return this.SERVER + this[k];
   }
