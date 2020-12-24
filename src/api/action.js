@@ -15,6 +15,8 @@ export default {
   'AddShop':'/shop/add',//添加店铺
   'Shop':'/shop/index',//店铺首页
   'ShopCommodity':'/shop/commodity',//店铺商品
+  'commodity':'/commodity/get',//商品详情
+  'addCar':'/shoping/add',//加入购物车
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
     return this.SERVER + this[k];
   }

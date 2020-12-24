@@ -26,7 +26,7 @@
           <div>
 
           <img v-bind:src="v.image" alt="">
-          <h4><el-link :underline="false" @clic="spxq(v.id)">{{v.name}}</el-link> </h4>
+          <h4><el-link :underline="false" @click="spxq(v.id)">{{v.name}}</el-link> </h4>
           <p>{{v.price}}</p>
           </div>
         </li>
@@ -52,10 +52,20 @@
     },
     methods:{
       spxq:function(id){
+         var data = {
+              id:id,
+              }
+              var url = this.axios.urls.commodity;
+              this.axios.post(url,data).then(resp => {
+                this.list=resp.data.result;
+                console.log(resp);
+              }).catch(resp => {
+                console.log(resp);
+              });
         console.log(id);
       }
 
-    }    ,
+    }   ,
     created: function() {
       var data = {
         shopId: this.$route.query.id,

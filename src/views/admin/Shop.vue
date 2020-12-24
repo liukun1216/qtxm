@@ -111,7 +111,7 @@
     },
     created: function() {
       var data = {
-        shopstatus:'待审核',
+        // shopstatus:'待审核',
       }
       var url = this.axios.urls.Admin_Shop;
       console.log(url);
