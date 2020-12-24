@@ -1,12 +1,16 @@
 <template>
   <div>
+    <el-header>
+      <top></top>
+    </el-header>
+    </el-container>
     <el-link target="_blank">个人信息</el-link>
     <div style="margin-left: 600px;">
       <el-form ref="form" :model="form" label-width="80px">
         <el-row>
           <el-col>
             <el-form-item label="id" v-if="false">
-              <el-input v-model="form.id" ></el-input>
+              <el-input v-model="form.id"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -54,6 +58,7 @@
 </template>
 
 <script>
+   import top from '@/components/top.vue'
   export default {
     data() {
       return {
@@ -62,28 +67,31 @@
           account: this.$route.query.account,
           username: this.$route.query.username,
           sex: '',
-          phone:'',
+          phone: '',
         }
       }
+    },
+    components: { //2.注册组件
+    	top
     },
     methods: {
       upduser: function() {
         var url = this.axios.urls.SYS_USER_RS_AD;
-        this.axios.post(url,this.form).then(resp=>{
+        this.axios.post(url, this.form).then(resp => {
           this.$router.push({
-            path:"/Personal",
-            query:{
-              account:this.form.account,
-              username:this.form.username
+            path: "/Personal",
+            query: {
+              account: this.form.account,
+              username: this.form.username
             }
           })
-        }).catch(resp=>{
+        }).catch(resp => {
           console.log(resp);
         });
       },
       listbyaccount: function() {
         var url = this.axios.urls.SYS_ACCOUONT_PHONE;
-        this.axios.post(url,this.form).then(resp => {
+        this.axios.post(url, this.form).then(resp => {
           this.form.id = resp.data.result.id;
           this.form.sex = resp.data.result.sex;
           this.form.phone = resp.data.result.phone;

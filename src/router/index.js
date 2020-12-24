@@ -6,6 +6,9 @@ import Idex from '@/views/Idex.vue'
 import Register from '@/views/Register.vue'
 import Personal from '@/views/Personal.vue'
 import user from '@/views/user.vue'
+import Shopping from '@/views/Shopping.vue'
+import address from '@/views/address.vue'
+
 
 Vue.use(Router)
 
@@ -41,6 +44,16 @@ export default new Router({
       name: 'user',
       component: user
     },
-    
+    {
+      path: '/Shopping',
+      name: 'Shopping',
+      component: Shopping
+    }, {
+      path: '/address',
+      name: 'address',
+      component: address
+    },
+
+
   ]
 })
