@@ -72,9 +72,51 @@ export default new Router({
          name: 'Personal',
          component: Personal
        },
+       {
+         path: '/user',
+         name: 'user',
+         component: user
+       },
+       {
+         path: '/AdminLogin',
+         name: 'AdminLogin',
+         component: AdminLogin
+       },
+       {
+         path: '/Shopping',
+         name: 'Shopping',
+         component: Shopping
+       }, {
+         path: '/address',
+         name: 'address',
+         component: address
+       },
+       {
+         path: '/Log',
+         name: 'Log',
+         component: Log
+       },
+       {
+         path: '/AdminShop',
+         name: 'AdminShop',
+         component: AdminShop
+       },{
+         path: '/AddShop',
+         name: 'AddShop',
+         component: AddShop
+       },{
+         path: '/Shop',
+         name: 'Shop',
+         component: Shop
+       },{
+         path: '/ShopTest',
+         name: 'ShopTset',
+         component: ShopTest
+
+       },
+
 
     {
-
       path: '/',
       name: 'AppMain',
       component: AppMain,
@@ -118,54 +160,11 @@ export default new Router({
           path: '/ookk',
           name: 'ookk',
           component: ookk,
-        }
-      ]
+        },]}
 
-      path: '/Personal',
-      name: 'Personal',
-      component: Personal
-    },
-    {
-      path: '/user',
-      name: 'user',
-      component: user
-    },,
-    {
-      path: '/AdminLogin',
-      name: 'AdminLogin',
-      component: AdminLogin
-    },
-    {
-      path: '/Shopping',
-      name: 'Shopping',
-      component: Shopping
-    }, {
-      path: '/address',
-      name: 'address',
-      component: address
-    },
-      path: '/Log',
-      name: 'Log',
-      component: Log
-    },
-    {
-      path: '/AdminShop',
-      name: 'AdminShop',
-      component: AdminShop
-    },{
-      path: '/AddShop',
-      name: 'AddShop',
-      component: AddShop
-    },{
-      path: '/Shop',
-      name: 'Shop',
-      component: Shop
-    },{
-      path: '/ShopTest',
-      name: 'ShopTset',
-      component: ShopTest
+      
 
-    }
+
 
   ]
 
