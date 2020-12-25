@@ -7,10 +7,14 @@ import 'element-ui/lib/theme-chalk/index.css' //新添加2，避免后期打包�
 
 import axios from '@/api/http'
 import VueAxios from 'vue-axios'
-// process.env.MOCK && require('@/mock')
+process.env.MOCK && require('@/mock')
 
 import App from './App'
 import router from './router'
+
+
+//引入markdown编辑器
+
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)   //新添加3  vue使用element-ui

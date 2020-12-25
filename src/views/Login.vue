@@ -1,32 +1,34 @@
 <template>
   <div class="login-wrap">
     <div class="login-container">
-      <el-form ref="form" :model="form" label-width="0px">
-        <div class="title">
-          <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-            <el-tab-pane label="账号登录" name="first">
-              <el-form-item class="">
+      <div class="title">
+        <el-tabs v-model="activeName" type="card">
+          <el-tab-pane label="账号登录" name="first">
+            <el-form ref="form" :model="form" :rules="rules" label-width="0px">
+              <el-form-item prop="account">
                 <el-input v-model="form.account" placeholder="账号名"></el-input>
               </el-form-item>
-              <el-form-item>
-                <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+              <el-form-item prop="password">
+                <el-input v-model="form.password" placeholder="请输入密码" type="password"></el-input>
               </el-form-item>
               <el-button type="primary" @click="onSubmit" style="width: 100%;">登陆</el-button>
-            </el-tab-pane>
-            <el-tab-pane label="手机号登录" name="second">
-              <el-form-item class="">
-                <el-input v-model="form.phone" placeholder="手机号"></el-input>
+            </el-form>
+          </el-tab-pane>
+          <el-tab-pane label="手机号登录" name="second">
+            <el-form ref="form1" :model="form1" :rules="rules1" label-width="0px">
+              <el-form-item prop="phone">
+                <el-input v-model="form1.phone" placeholder="手机号"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+                <!-- <el-input v-model="form.password" placeholder="请输入密码"></el-input> -->
               </el-form-item>
-              <el-button type="primary" @click="onSubmit" style="width: 100%;">登陆</el-button>
-            </el-tab-pane>
-            </el-tab-pane>
-          </el-tabs>
-          <el-link @click="toreGister" style="margin-top: 5px;float: right;" target="_blank">免费注册</el-link>
-        </div>
-      </el-form>
+              <el-button type="primary"  style="width: 100%;">登陆</el-button>
+            </el-form>
+          </el-tab-pane>
+        </el-tabs>
+        <el-link @click="toreGister" style="margin-top: 5px;float: right;" target="_blank">免费注册</el-link>
+      </div>
+
     </div>
   </div>
 </template>
@@ -35,41 +37,87 @@
   export default {
     name: 'HelloWorld',
     data() {
+      var checkphone = (rule, value, callback) => {
+        // let phoneReg = /(^1[3|4|5|6|7|8|9]\d{9}$)|(^09\d{8}$)/;
+        if (value == "") {
+          callback(new Error("请输入手机号"));
+        } else if (!this.isCellPhone(value)) { //引入methods中封装的检查手机格式的方法
+          callback(new Error("请输入正确的手机号!"));
+        } else {
+          callback();
+        }
+      };
       return {
         activeName: 'first',
         form: {
           account: '',
           password: '',
-          phone:''
         },
+        form1:{
+          phone: ''
+        },
+        rules: {
+          account: [{
+            required: true,
+            message: '请输入账号',
+            trigger: 'blur'
+          }],
+          password: [{
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          }],
+        },
+        rules1: {
+          phone: [{
+            required: true,
+            validator: checkphone,
+            trigger: "blur"
+          }]
+        },
+
       }
     },
     methods: {
       onSubmit: function() {
-        var url = this.axios.urls.SYS_USER_LOGIN;
+        this.$refs["form"].validate((valid) => {
+          if (valid) {
+            var url = this.axios.urls.SYS_USER_LOGIN;
+            this.axios.post(url, this.form).then(resp => {
+              console.log(resp);
+              if (resp.data.code == 0) {
+                console.log(resp.data.result.username);
+                this.$router.push({
+                  path: "/Idex",
+                  query: {
+                    username: resp.data.result.username,
+                    account: resp.data.result.account
+                  },
+                });
+              } else {
+                this.$message.error(resp.data.message);
+              }
 
-        this.axios.post(url, this.form).then(resp => {
-          console.log(resp);
-          if (resp.data.code == 0) {
-            console.log(resp.data.result.username);
-            this.$router.push({
-              path: "/Idex",
-              query: {
-                username: resp.data.result.username,
-                account: resp.data.result.account
-              },
+            }).catch(resp => {
+              console.log(resp);
+              this.$message.error('登陆失败');
             });
           } else {
-            this.$message.error(resp.data.message);
+            this.$message.error('请输入账号名或密码');
+            return false;
           }
-
-        }).catch(resp => {
-          console.log(resp);
-          this.$message.error('登陆失败');
         });
+
       },
       toreGister: function() {
         this.$router.push("/Register");
+      },
+      isCellPhone(val) {
+        if (!/^1(3|4|5|6|7|8)\d{9}$/.test(val)) {
+          return false;
+        } else {
+          return true;
+        }
       }
 
     }
