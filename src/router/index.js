@@ -18,6 +18,8 @@ import Change from '@/views/sys/Change.vue'
 import rili from '@/views/sys/rili.vue'
 import bz from '@/views/sys/bz.vue'
 import img from '@/views/sys/img.vue'
+import addprod from '@/views/sys/addprod.vue'
+
 
 
 
@@ -97,18 +99,6 @@ export default new Router({
          component: Log
        },
        {
-         path: '/AdminShop',
-         name: 'AdminShop',
-         component: AdminShop
-       },{
-         path: '/AddShop',
-         name: 'AddShop',
-         component: AddShop
-       },{
-         path: '/Shop',
-         name: 'Shop',
-         component: Shop
-       },{
          path: '/ShopTest',
          name: 'ShopTset',
          component: ShopTest
@@ -147,6 +137,11 @@ export default new Router({
           component: img
         },
         {
+          path: 'sys/addprod',
+          name: 'addprod',
+          component: addprod
+        },
+        {
           path: 'sys/bz',
           name: 'bz',
           component: bz
@@ -160,11 +155,21 @@ export default new Router({
           path: '/ookk',
           name: 'ookk',
           component: ookk,
-        },]}
-
-      
-
-
+        },
+        {
+          path: '/AdminShop',
+          name: 'AdminShop',
+          component: AdminShop
+        },{
+          path: '/AddShop',
+          name: 'AddShop',
+          component: AddShop
+        },{
+          path: '/Shop',
+          name: 'Shop',
+          component: Shop
+        },
+        ]}
 
   ]
 

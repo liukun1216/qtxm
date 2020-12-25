@@ -14,23 +14,29 @@
               </template>
             </el-table-column> -->
         <el-table-column prop="introduction" label="简介" min-width="30"></el-table-column>
-        <el-table-column prop="sales_volume" label="详细介绍" min-width="40"></el-table-column>
-        <el-table-column prop="create_time" label="销量" min-width="30"></el-table-column>
-        <el-table-column prop="update_time" label="创建时间" min-width="40"></el-table-column>
-        <el-table-column prop="status" label="更新时间" min-width="40"></el-table-column>
-        <el-table-column prop="addedTime" label="状态" min-width="30"></el-table-column>
-        <el-table-column prop="detailed_introduction" label="上架时间" min-width="40"></el-table-column>
+        <el-table-column prop="detailed_introduction" label="详细介绍" min-width="40"></el-table-column>
+        <el-table-column prop="sales_volume" label="销量" min-width="30"></el-table-column>
+        <el-table-column prop="create_time" label="创建时间" min-width="40"></el-table-column>
+        <el-table-column prop="update_time" label="更新时间" min-width="40"></el-table-column>
+        <el-table-column prop="status" label="状态" min-width="30"></el-table-column>
+        <el-table-column prop="added_time" label="上架时间" min-width="40"></el-table-column>
 
 
 
         <el-table-column label="操作" min-width="70">
           <template slot-scope="scope">
-            <el-button @click="handleDel(scope.row)" size="small" type="danger" icon="el-icon-delete" :disabled="scope.row.dictIsEditable=='否'">删除</el-button>
-            <el-button @click="handleEdit(scope.row)" class="el-icon-edit" type="text" size="small" :disabled="scope.row.dictIsEditable=='否'">修改</el-button>
+            <el-button @click="doMerge(scope.row)" size="small" type="text"  class="el-icon-plus" >新增</el-button>
+            <el-button @click="handleDel(scope.row)" size="small" type="text"  class="el-icon-delete" >删除</el-button>
+            <el-button @click="handleEdit(scope.row)" class="el-icon-edit" type="text" size="small" :disabled="scope.row.status=='否'">修改</el-button>
           </template>
         </el-table-column>
       </el-table>
+
+
     </div>
+
+
+
   </div>
 </template>
 
@@ -41,6 +47,7 @@
       return {
         id: '',
         tableList: [],
+        
         salChanceFrom: {
 
         },
@@ -63,6 +70,22 @@
 
         });
       },
+      handleDel: function(row) {
+        var data = {
+          id: row.id
+        }
+        var url = this.axios.urls.COMMODITY_DEL;
+        this.axios.post(url, data).then(resp => {
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+          this.search();
+        }).create(resp => {
+
+        });
+      },
+
 
     },
     created: function() {

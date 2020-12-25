@@ -12,6 +12,10 @@ process.env.MOCK && require('@/mock')
 import App from './App'
 import router from './router'
 
+
+//引入markdown编辑器
+
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)   //新添加3  vue使用element-ui
 Vue.use(VueAxios,axios)

@@ -23,11 +23,18 @@
       <template slot="title">商品管理</template>
        <el-menu-item index="/sys/img">商品首页</el-menu-item>
       <el-menu-item index="/test">商品表</el-menu-item>
-      <el-menu-item index="/">添加商品</el-menu-item>
-
-
-
+      <el-menu-item index="/sys/addprod">添加商品</el-menu-item>
     </el-submenu>
+
+
+    <el-submenu index="2-6">
+      <template slot="title">店鋪管理</template>
+       <el-menu-item index="/AdminShop">AdminShop</el-menu-item>
+      <el-menu-item index="/AddShop">AddShop</el-menu-item>
+      <el-menu-item index="/Shop">Shop</el-menu-item>
+    </el-submenu>
+
+
   </el-menu>
 
 </template>
