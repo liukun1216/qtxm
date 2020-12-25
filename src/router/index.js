@@ -18,6 +18,7 @@ import Shop from '@/views/shop/Shop.vue'
 import ShopTest from '@/views/shop/test.vue'
 
 
+
 Vue.use(Router)
 
 export default new Router({

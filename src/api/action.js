@@ -17,6 +17,7 @@ export default {
   'ShopCommodity':'/shop/commodity',//店铺商品
   'commodity':'/commodity/get',//商品详情
   'addCar':'/shoping/add',//加入购物车
+  'Comorder_tj':'/comorder/ddtj',//订单提交
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
     return this.SERVER + this[k];
   }
