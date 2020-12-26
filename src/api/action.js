@@ -10,9 +10,9 @@ export default {
 
   'SYS_ACCOUONT_PHONE':'/listByAccountAndPhone',
 
-  'COMMODITY_ADD_UP':'/AddAndUp',//新增和修改
-  'COMMODITY_DEL':'/Del',//删除
-  'COMMODITY_LIST':'/List',//查询
+  'COMMODITY_ADD_UP':'/commodity/AddAndUp',//新增和修改
+  'COMMODITY_DEL':'/commodity/Del',//删除
+  'COMMODITY_LIST':'/commodity/List',//查询
 
 
 

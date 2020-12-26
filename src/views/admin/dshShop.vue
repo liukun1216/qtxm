@@ -17,6 +17,8 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button @click="onSubmit(scope.row)">查看店铺页面</el-button>
+            <el-button @click="shtg(scope.row)" class="el-icon-check"></el-button>
+            <el-button @click="shbh(scope.row)" class="el-icon-close"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -109,7 +111,7 @@
     },
     created: function() {
       var data = {
-        shopstatus:'正常',
+        shopstatus:'待审核',
       }
       var url = this.axios.urls.Admin_Shop;
       console.log(url);

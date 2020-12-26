@@ -32,14 +32,14 @@
        onSubmit:function(){
           var url = this.axios.urls.Admin_Login;
             console.log(url);
-            debugger;
            this.axios.post(url,this.form).then(resp=>{
-             console.log(resp.data.code);
+             console.log(resp.data.result);
              var c=resp.data.code;
             if(c>=0){
               this.$message.success('登陆成功')
-              this.$router.push("/Idex");
-      
+              sessionStorage.setItem("adminId",resp.data.result.id)
+              this.$router.push("/AppMain");
+
             }
               console.log(resp);
 

@@ -29,9 +29,9 @@
 
     <el-submenu index="2-6">
       <template slot="title">店鋪管理</template>
-       <el-menu-item index="/AdminShop">AdminShop</el-menu-item>
-      <el-menu-item index="/AddShop">AddShop</el-menu-item>
-      <el-menu-item index="/Shop">Shop</el-menu-item>
+       <el-menu-item index="/AdminShop">店铺列表</el-menu-item>
+      <el-menu-item index="/dshShop">待审核店铺</el-menu-item>
+      <el-menu-item index="/Shop"> Shop</el-menu-item>
     </el-submenu>
 
 

@@ -32,6 +32,8 @@ import address from '@/views/address.vue'
 import AdminLogin from '@/views/admin/Login.vue'
 import Log from '@/views/admin/Log.vue'
 import AdminShop from '@/views/admin/Shop.vue'
+import dshShop from '@/views/admin/dshShop.vue'
+
 
 //店铺模块
 import AddShop from '@/views/shop/addShop.vue'
@@ -160,6 +162,10 @@ export default new Router({
           path: '/AdminShop',
           name: 'AdminShop',
           component: AdminShop
+        },{
+          path: '/dshShop',
+          name: 'dshShop',
+          component: dshShop
         },{
           path: '/AddShop',
           name: 'AddShop',
