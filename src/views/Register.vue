@@ -3,32 +3,36 @@
     <div class="dcenter">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="账号" prop="account">
-          <el-input v-model="form.account"></el-input>
+          <el-input v-model="form.account" placeholder="请输入账号"></el-input>
         </el-form-item>
 
         <el-form-item label="昵称" prop="username">
-          <el-input v-model="form.username"></el-input>
+          <el-input v-model="form.username" placeholder="请输入昵称"></el-input>
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password"></el-input>
+          <el-input v-model="form.password" placeholder="请输入密码"></el-input>
         </el-form-item>
 
         <el-form-item label="真实姓名" prop="realname">
-          <el-input v-model="form.realname"></el-input>
+          <el-input v-model="form.realname" placeholder="请输入真实姓名"></el-input>
         </el-form-item>
 
         <el-form-item label="联系电话" prop="phone">
-          <el-input v-model="form.phone"></el-input>
+          <el-input v-model="form.phone"  placeholder="请输入联系电话"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="code"  placeholder="请输入验证码" style="width: 55%;"></el-input>
+          <el-button type="primary" @click="getcode" style="width: 40%;">获取验证码</el-button>
         </el-form-item>
 
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="form.email" type="email"></el-input>
+        <el-form-item label="邮箱" prop="email" >
+          <el-input v-model="form.email" type="email" placeholder="请输入邮箱"></el-input>
         </el-form-item>
-         <el-form-item label="地址" prop="address" >
-           <el-cascader :v-model="form.address" :options="options" ref="cascaderDay" @change="abc">
-           </el-cascader>
-         </el-form-item>
+        <el-form-item label="地址" prop="address" placeholder="请输入选择省/市/区">
+          <el-cascader :v-model="form.address" :options="options" ref="cascaderDay" @change="abc">
+          </el-cascader>
+        </el-form-item>
         <el-button type="primary" @click="reGister">确定注册</el-button>
         <el-button type="primary" @click="Out">回到主页</el-button>
       </el-form>
@@ -37,7 +41,11 @@
 </template>
 
 <script>
-  import {provinceAndCityData, regionData, CodeToText} from 'element-china-area-data'
+  import {
+    provinceAndCityData,
+    regionData,
+    CodeToText
+  } from 'element-china-area-data'
   export default {
     name: 'HelloWorld',
     data() {
@@ -53,6 +61,8 @@
       };
 
       return {
+        code:'',
+        outcode:'',
         form: {
           account: '', //账号
           username: '', //昵称
@@ -64,7 +74,7 @@
           // status:'',//状态
           address: '' //地址
         },
-       options: regionData,
+        options: regionData,
         rules: {
           account: [{
               required: true,
@@ -132,29 +142,49 @@
       }
     },
     methods: {
-      reGister: function() {
+      getcode: function() {
         this.$refs["form"].validate((valid) => {
           if (valid) {
-            var url = this.axios.urls.SYS_USER_RS_AD;
+            var url = this.axios.urls.SYS_USER_GETCODE;
             this.axios.post(url, this.form).then(resp => {
-              console.log(resp);
-              this.$message({
-                message: resp.data.message,
-                type: 'success'
-              });
-              this.$router.push({
-                path: "/Idex",
-                query: {
-                  account: this.form.account,
-                  username: this.form.username
-                }
-              })
+              this.outcode = resp.data.code;
             }).catch(resp => {
               console.log(resp);
             });
-
           } else {
+            this.$message.error('请输入手机号码');
+            return false;
+          }
+        });
+      },
 
+      reGister: function() {
+        this.$refs["form"].validate((valid) => {
+          if (valid) {
+            console.log(this.code);
+            console.log(this.outcode);
+              if(this.code == this.outcode){
+                var url = this.axios.urls.SYS_USER_RS_AD;
+                this.axios.post(url, this.form).then(resp => {
+                  console.log(resp);
+                  this.$message({
+                    message: resp.data.message,
+                    type: 'success'
+                  });
+                  this.$router.push({
+                    path: "/Idex",
+                    query: {
+                      account: this.form.account,
+                      username: this.form.username
+                    }
+                  })
+                }).catch(resp => {
+                  console.log(resp);
+                });
+              }else{
+                this.$message.error('验证码有误或者为空');
+              }
+          } else {
             return false;
           }
         });

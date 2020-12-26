@@ -47,118 +47,50 @@ import ShopTest from '@/views/shop/test.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/AppMain',
-      name: 'AppMain',
-      component: AppMain,
-    },
-       {
-         path: '/idex',
-         name: 'Idex',
-         component: Idex
-       },
-       {
-         path: '/Login',
-         name: 'Login',
-         component: Login
-       },
-       {
-         path: '/',
-         name: 'Idex',
-         component: Idex
-       },
-       {
-         path: '/Register',
-         name: 'Register',
-         component: Register
-       },
-       {
-         path: '/Personal',
-         name: 'Personal',
-         component: Personal
-       },
-       {
-         path: '/user',
-         name: 'user',
-         component: user
-       },
-       {
-         path: '/AdminLogin',
-         name: 'AdminLogin',
-         component: AdminLogin
-       },
-       {
-         path: '/Shopping',
-         name: 'Shopping',
-         component: Shopping
-       }, {
-         path: '/address',
-         name: 'address',
-         component: address
-       },
-       {
-         path: '/Log',
-         name: 'Log',
-         component: Log
-       },
-       {
-         path: '/ShopTest',
-         name: 'ShopTset',
-         component: ShopTest
-
-       },
-
-
-    {
-      path: '/',
-      name: 'AppMain',
-      component: AppMain,
-      children:[
-        {
-          path: 'sys/User',
-          name: 'User',
-          component: User
+      routes: [{
+          path: '/',
+          name: 'Idex',
+          component: Idex
         },
         {
-          path: 'sys/Centre',
-          name: 'Centre',
-          component: Centre
+          path: '/Login',
+          name: 'Login',
+          component: Login
         },
         {
-          path: 'sys/Change',
-          name: 'Change',
-          component: Change
+          path: '/Idex',
+          name: 'Idex',
+          component: Idex
         },
         {
-          path: 'sys/rili',
-          name: 'rili',
-          component: rili
+          path: '/Register',
+          name: 'Register',
+          component: Register
         },
         {
-          path: 'sys/img',
-          name: 'img',
-          component: img
+          path: '/Personal',
+          name: 'Personal',
+          component: Personal
         },
         {
-          path: 'sys/addprod',
-          name: 'addprod',
-          component: addprod
+          path: '/user',
+          name: 'user',
+          component: user
         },
         {
-          path: 'sys/bz',
-          name: 'bz',
-          component: bz
+          path: '/AdminLogin',
+          name: 'AdminLogin',
+          component: AdminLogin
         },
         {
-          path: '/test',
-          name: 'test',
-          component: test
+          path: '/Shopping',
+          name: 'Shopping',
+          component: Shopping
         },
         {
-          path: '/ookk',
-          name: 'ookk',
-          component: ookk,
+          path: '/address',
+          name: 'address',
+          component: address
         },
         {
           path: '/AdminShop',
@@ -176,15 +108,145 @@ export default new Router({
           path: '/Shop',
           name: 'Shop',
           component: Shop
-        },,{
+        },{
           path: '/AdminUser',
           name:'AdminUser',
           component: AdminUser
         },
-        ]}
+           {
+            path: '/AppMain',
+            name: 'AppMain',
+            component: AppMain,
+          },
+          {
+            path: '/idex',
+            name: 'Idex',
+            component: Idex
+          },
+          {
+            path: '/Login',
+            name: 'Login',
+            component: Login
+          },
+          {
+            path: '/',
+            name: 'Idex',
+            component: Idex
+          },
+          {
+            path: '/Register',
+            name: 'Register',
+            component: Register
+          },
+          {
+            path: '/Personal',
+            name: 'Personal',
+            component: Personal
+          },
+          {
+            path: '/user',
+            name: 'user',
+            component: user
+          },
+          {
+            path: '/AdminLogin',
+            name: 'AdminLogin',
+            component: AdminLogin
+          },
+          {
+            path: '/Shopping',
+            name: 'Shopping',
+            component: Shopping
+          },
+          {
+            path: '/address',
+            name: 'address',
+            component: address
+          },
+          {
+            path: '/Log',
+            name: 'Log',
+            component: Log
+          },
+          {
+            path: '/ShopTest',
+            name: 'ShopTset',
+            component: ShopTest
 
-  ]
+          },
+
+
+          {
+            path: '/',
+            name: 'AppMain',
+            component: AppMain,
+            children: [{
+                path: 'sys/User',
+                name: 'User',
+                component: User
+              },
+              {
+                path: 'sys/Centre',
+                name: 'Centre',
+                component: Centre
+              },
+              {
+                path: 'sys/Change',
+                name: 'Change',
+                component: Change
+              },
+              {
+                path: 'sys/rili',
+                name: 'rili',
+                component: rili
+              },
+              {
+                path: 'sys/img',
+                name: 'img',
+                component: img
+              },
+              {
+                path: 'sys/addprod',
+                name: 'addprod',
+                component: addprod
+              },
+              {
+                path: 'sys/bz',
+                name: 'bz',
+                component: bz
+              },
+              {
+                path: '/test',
+                name: 'test',
+                component: test
+              },
+              {
+                path: '/ookk',
+                name: 'ookk',
+                component: ookk,
+              },
+              {
+                path: '/AdminShop',
+                name: 'AdminShop',
+                component: AdminShop
+              }, {
+                path: '/dshShop',
+                name: 'dshShop',
+                component: dshShop
+              }, {
+                path: '/AddShop',
+                name: 'AddShop',
+                component: AddShop
+              }, {
+                path: '/Shop',
+                name: 'Shop',
+                component: Shop
+              },
+            ]
+          }
+
+        ]
 
 
 
-})
+      })

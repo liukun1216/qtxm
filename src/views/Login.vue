@@ -20,9 +20,10 @@
                 <el-input v-model="form1.phone" placeholder="手机号"></el-input>
               </el-form-item>
               <el-form-item>
-                <!-- <el-input v-model="form.password" placeholder="请输入密码"></el-input> -->
+                <el-input v-model="authcode" placeholder="请输入验证码" style="width: 65%;"></el-input>
+                <el-button type="primary" @click="getcode" style="width: 30%;">获取验证码</el-button>
               </el-form-item>
-              <el-button type="primary"  style="width: 100%;">登陆</el-button>
+              <el-button type="primary" style="width: 100%;" @click="phoneandcode">登陆</el-button>
             </el-form>
           </el-tab-pane>
         </el-tabs>
@@ -48,12 +49,14 @@
         }
       };
       return {
+        authcode: '',
+        outcode: '',
         activeName: 'first',
         form: {
           account: '',
           password: '',
         },
-        form1:{
+        form1: {
           phone: ''
         },
         rules: {
@@ -79,6 +82,51 @@
       }
     },
     methods: {
+      phoneandcode: function() {
+        this.$refs["form1"].validate((valid) => {
+          if (this.authcode != this.outcode) {
+            if (valid) {
+              var url = this.axios.urls.SYS_USER_PHONE;
+              console.log(this.form1.phone);
+              this.axios.post(url, this.form1).then(resp => {
+                this.$router.push({
+                  path: "/Idex",
+                  query: {
+                    username: resp.data.result.username,
+                    account: resp.data.result.account
+                  },
+                });
+                sessionStorage.setItem("userid", resp.data.result.id);
+              }).catch(resp => {
+                console.log(resp);
+              });
+            } else {
+              this.$message.error('电话号码不存在');
+              return false;
+            }
+          } else {
+            this.$message.error('验证码有误或者为空');
+          }
+        });
+
+
+      },
+      getcode: function() {
+        this.$refs["form1"].validate((valid) => {
+          if (valid) {
+            var url = this.axios.urls.SYS_USER_GETCODE;
+            this.axios.post(url, this.form1).then(resp => {
+              this.outcode = resp.data.code;
+            }).catch(resp => {
+              console.log(resp);
+            });
+          } else {
+            this.$message.error('请输入手机号码');
+            return false;
+          }
+        });
+      },
+      //账号登录
       onSubmit: function() {
         this.$refs["form"].validate((valid) => {
           if (valid) {
@@ -94,10 +142,10 @@
                     account: resp.data.result.account
                   },
                 });
+
               } else {
                 this.$message.error(resp.data.message);
               }
-
             }).catch(resp => {
               console.log(resp);
               this.$message.error('登陆失败');
