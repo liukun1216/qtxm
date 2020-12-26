@@ -19,6 +19,8 @@ import rili from '@/views/sys/rili.vue'
 import bz from '@/views/sys/bz.vue'
 import img from '@/views/sys/img.vue'
 import addprod from '@/views/sys/addprod.vue'
+import AdminUser from '@/views/admin/User.vue'
+
 
 
 
@@ -39,6 +41,7 @@ import dshShop from '@/views/admin/dshShop.vue'
 import AddShop from '@/views/shop/addShop.vue'
 import Shop from '@/views/shop/Shop.vue'
 import ShopTest from '@/views/shop/test.vue'
+import spxq from '@/views/shop/spxq.vue'
 
 
 
@@ -91,9 +94,27 @@ export default new Router({
           component: address
         },
         {
-          path: '/Log',
-          name: 'Log',
-          component: Log,
+          path: '/AdminShop',
+          name: 'AdminShop',
+          component: AdminShop
+        },{
+          path: '/dshShop',
+          name: 'dshShop',
+          component: dshShop
+        },{
+          path: '/AddShop',
+          name: 'AddShop',
+          component: AddShop
+        },{
+          path: '/Shop',
+          name: 'Shop',
+          component: Shop
+        },{
+          path: '/AdminUser',
+          name:'AdminUser',
+          component: AdminUser
+        },
+           {
             path: '/AppMain',
             name: 'AppMain',
             component: AppMain,
@@ -199,6 +220,11 @@ export default new Router({
                 path: '/test',
                 name: 'test',
                 component: test
+              },
+              {
+                path: '/spxq',
+                name: 'spxq',
+                component: spxq
               },
               {
                 path: '/ookk',
