@@ -77,7 +77,18 @@
       <el-divider></el-divider>
       <!-- 下 -->
       <el-footer>
+<div class="" id="box">
+      <ul>
+        <li v-for="v in commodityTable">
+          <div>
 
+          <img v-bind:src="v.image" alt="">
+          <h4><el-link :underline="false" @click="spxq(v.id)">{{v.name}}</el-link> </h4>
+          <p>{{v.price}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
       </el-footer>
     </el-container>
 
@@ -96,6 +107,7 @@
         activeIndex2: '1',
         a: true,
         b: false,
+        commodityTable:[],
         username: this.$route.query.username,
         imagesbox: [{
             id: 0,
@@ -157,6 +169,22 @@
         this.b = false;
         this.$route.query.username = null;
 
+      },
+      sp: function() {
+
+        var url = this.axios.urls.COMMODITY_LIST;
+        this.axios.post(url).then(resp => {
+          this. commodityTable=resp.data.result;
+
+          console.log(resp);
+
+
+
+
+        }).catch(resp => {
+          console.log(resp);
+        });
+        console.log(123);
       }
 
 
@@ -164,6 +192,7 @@
 
     },
     created: function() {
+      this.sp();
       if (undefined != this.$route.query.username) {
         this.a = false;
         this.b = true;
@@ -182,5 +211,21 @@
     opacity: 0.75;
     line-height: 300px;
     margin: 0;
+  }
+  #box ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #box li {
+    padding: 3px;
+    list-style: none;
+    margin-right: 15px;
+    border: 1px solid #eee;
+  }
+  
+  #box img {
+    width: 200px;
+    height: 150px;
   }
 </style>
