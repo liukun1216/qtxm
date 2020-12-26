@@ -27,6 +27,8 @@ export default {
   'Admin_Log':'/admin/getLog',//查询日志
   'Admin_Shop':'/admin/getShop',//查询店铺
   'Admin_ShopDudit':'/admin/ShopDudit',//查询店铺
+  'Admin_User':'/admin/user',//查询用户
+  'Admin_updateUser':'/admin/updateUser',//操作用户
   'AddShop':'/shop/add',//添加店铺
   'Shop':'/shop/index',//店铺首页
   'ShopCommodity':'/shop/commodity',//店铺商品

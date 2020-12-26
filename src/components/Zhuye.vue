@@ -18,6 +18,8 @@
 
     <el-menu-item index="/ookk">O泡时间到</el-menu-item>
     <el-menu-item index="/sys/rili">日历</el-menu-item>
+    <el-menu-item index="/AdminUser">用户管理</el-menu-item>
+
 
     <el-submenu index="2-5">
       <template slot="title">商品管理</template>
@@ -33,6 +35,8 @@
       <el-menu-item index="/dshShop">待审核店铺</el-menu-item>
       <el-menu-item index="/Shop"> Shop</el-menu-item>
     </el-submenu>
+
+
 
 
   </el-menu>

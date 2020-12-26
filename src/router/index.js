@@ -19,6 +19,8 @@ import rili from '@/views/sys/rili.vue'
 import bz from '@/views/sys/bz.vue'
 import img from '@/views/sys/img.vue'
 import addprod from '@/views/sys/addprod.vue'
+import AdminUser from '@/views/admin/User.vue'
+
 
 
 
@@ -174,6 +176,10 @@ export default new Router({
           path: '/Shop',
           name: 'Shop',
           component: Shop
+        },,{
+          path: '/AdminUser',
+          name:'AdminUser',
+          component: AdminUser
         },
         ]}
 
