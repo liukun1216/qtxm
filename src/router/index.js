@@ -39,6 +39,7 @@ import dshShop from '@/views/admin/dshShop.vue'
 import AddShop from '@/views/shop/addShop.vue'
 import Shop from '@/views/shop/Shop.vue'
 import ShopTest from '@/views/shop/test.vue'
+import spxq from '@/views/shop/spxq.vue'
 
 
 
@@ -199,6 +200,11 @@ export default new Router({
                 path: '/test',
                 name: 'test',
                 component: test
+              },
+              {
+                path: '/spxq',
+                name: 'spxq',
+                component: spxq
               },
               {
                 path: '/ookk',

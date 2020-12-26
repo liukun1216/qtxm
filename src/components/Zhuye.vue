@@ -24,6 +24,7 @@
        <el-menu-item index="/sys/img">商品首页</el-menu-item>
       <el-menu-item index="/test">商品表</el-menu-item>
       <el-menu-item index="/sys/addprod">添加商品</el-menu-item>
+      <el-menu-item index="/spxq">商品详情</el-menu-item>
     </el-submenu>
 
 
