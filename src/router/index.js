@@ -55,7 +55,7 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: user
-    },,
+    },
     {
       path: '/AdminLogin',
       name: 'AdminLogin',
@@ -65,11 +65,13 @@ export default new Router({
       path: '/Shopping',
       name: 'Shopping',
       component: Shopping
-    }, {
+    },
+    {
       path: '/address',
       name: 'address',
       component: address
     },
+    {
       path: '/Log',
       name: 'Log',
       component: Log

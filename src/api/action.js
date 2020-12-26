@@ -8,6 +8,9 @@ export default {
   'SYS_USER_LOGIN':'/login',//登录
   'SYS_USER_RS_AD':'/RsAndAd',//新增and修改
   'SYS_ACCOUONT_PHONE':'/listByAccountAndPhone',//通过账号or手机号查
+  'SYS_USER_PHONE':'/codelogin',//手机验证码登录
+  'SYS_USER_GETCODE':'/getcode',//获取验证码
+  'SYS_AREA_LISTBYCODE':'listbyzipcode',//获取地域名
 
   'SYS_ADDRESS_ADD':'/Addaddress',//增加收获地址
   'SYS_ADDRESS_LIST_USERID':'/listByuserid',//通过用户id查询收获地址

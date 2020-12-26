@@ -18,11 +18,11 @@
 
     <div style="margin-top: -110px;margin-right: 500px;">
       <div>
-        <el-avatar size="50"></el-avatar>
+        <el-avatar ></el-avatar>
       </div>
       <div>
         <el-link :underline="false" style="margin-left: 200px; margin-top: -70px;" @click="detail">{{this.$route.query.username}}({{this.$route.query.account}})</el-link>
-        <el-link :underline="false" style="margin-top: -70px;" @click="toaddress">我的收获地址</el-link>
+        <el-link :underline="false" style="margin-top: -70px;" @click="toaddress">我的收货地址</el-link>
       </div>
 
       <div style="margin-right: -220px;">
