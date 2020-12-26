@@ -96,7 +96,8 @@
                     account: resp.data.result.account
                   },
                 });
-                sessionStorage.setItem("userid", resp.data.result.id);
+                sessionStorage.setItem("username", resp.data.result.username);
+                sessionStorage.setItem("account", resp.data.result.account);
               }).catch(resp => {
                 console.log(resp);
               });
@@ -142,7 +143,8 @@
                     account: resp.data.result.account
                   },
                 });
-
+                  sessionStorage.setItem("username", resp.data.result.username);
+                  sessionStorage.setItem("account", resp.data.result.account);
               } else {
                 this.$message.error(resp.data.message);
               }

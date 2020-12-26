@@ -5,7 +5,7 @@
         text-color="#000000" >
         <!-- active-text-color="#ffd04b" -->
         <el-menu-item index="8">
-          <el-link target="_blank">{{this.$route.query.username}}</el-link>
+          <el-link target="_blank">{{username}}</el-link>
         </el-menu-item>
         <el-menu-item style="margin-left: 1000px;">
           <el-link :underline="false" @click="toindex">地狗首页</el-link>
@@ -34,7 +34,7 @@
   export default{
     data(){
       return{
-
+        username:sessionStorage.getItem("username"),
       }
     },
     methods:{

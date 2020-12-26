@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div>
     <el-container>
       <!-- 上 -->
@@ -109,6 +109,7 @@
         b: false,
         commodityTable:[],
         username: this.$route.query.username,
+         account:'',
         imagesbox: [{
             id: 0,
             idView: require("@/IMG/1.png")
@@ -197,6 +198,22 @@
         this.a = false;
         this.b = true;
       }
+      if(undefined!=sessionStorage.getItem("username")){
+        debugger
+        this.username=sessionStorage.getItem("username");
+        this.account=sessionStorage.getItem("account");
+        // sessionStorage.removeItem("username");
+        //  sessionStorage.removeItem("account");
+        this.$router.push({
+          path: "/Idex",
+          query: {
+            username:this.username,
+            account:this.account,
+          },
+        });
+        this.a = false;
+        this.b = true;
+      }
 
 
     }
@@ -216,14 +233,14 @@
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   #box li {
     padding: 3px;
     list-style: none;
     margin-right: 15px;
     border: 1px solid #eee;
   }
-  
+
   #box img {
     width: 200px;
     height: 150px;

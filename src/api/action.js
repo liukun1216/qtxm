@@ -7,8 +7,10 @@ export default {
   'SERVER': 'http://localhost:8080/ssmht/', //服务器
   'SYS_USER_LOGIN':'/login',//登录
   'SYS_USER_RS_AD':'/RsAndAd',//新增and修改
-
   'SYS_ACCOUONT_PHONE':'/listByAccountAndPhone',
+  'SYS_SHOPPING_LIST':'/getcar',//通过用户id查询购物车商品
+  'SYS_SHOPPING_DEL':'/delshop',//通过购物车id删除商品
+  'SYS_SHOPPING_JS':'/alipaySum',//结算
 
   'COMMODITY_ADD_UP':'/commodity/AddAndUp',//新增和修改
   'COMMODITY_DEL':'/commodity/Del',//删除
@@ -36,6 +38,7 @@ export default {
   'commodity':'/commodity/get',//商品详情
   'addCar':'/shoping/add',//加入购物车
   'Comorder_tj':'/comorder/ddtj',//订单提交
+
 
 
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
