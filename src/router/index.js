@@ -93,27 +93,6 @@ export default new Router({
           name: 'address',
           component: address
         },
-        {
-          path: '/AdminShop',
-          name: 'AdminShop',
-          component: AdminShop
-        },{
-          path: '/dshShop',
-          name: 'dshShop',
-          component: dshShop
-        },{
-          path: '/AddShop',
-          name: 'AddShop',
-          component: AddShop
-        },{
-          path: '/Shop',
-          name: 'Shop',
-          component: Shop
-        },{
-          path: '/AdminUser',
-          name:'AdminUser',
-          component: AdminUser
-        },
            {
             path: '/AppMain',
             name: 'AppMain',
@@ -221,11 +200,7 @@ export default new Router({
                 name: 'test',
                 component: test
               },
-              {
-                path: '/spxq',
-                name: 'spxq',
-                component: spxq
-              },
+             
               {
                 path: '/ookk',
                 name: 'ookk',
@@ -235,18 +210,31 @@ export default new Router({
                 path: '/AdminShop',
                 name: 'AdminShop',
                 component: AdminShop
-              }, {
+              },
+              {
                 path: '/dshShop',
                 name: 'dshShop',
                 component: dshShop
-              }, {
+              },
+              {
                 path: '/AddShop',
                 name: 'AddShop',
                 component: AddShop
-              }, {
+              },
+              {
                 path: '/Shop',
                 name: 'Shop',
                 component: Shop
+              },
+              {
+                path: '/spxq',
+                name: 'spxq',
+                component: spxq
+              },
+              {
+                path: '/AdminUser',
+                name:'AdminUser',
+                component: AdminUser
               },
             ]
           }
