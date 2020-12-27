@@ -66,6 +66,49 @@
       }
 
     }   ,
+	onSubmit: function(row) {
+	  var data = {
+	    shopId: row.id
+	  }
+	  var url = this.axios.urls.Shop;
+	  this.axios.post(url, data).then(resp => {
+	    this.$router.push({
+	      path: "/Shop",
+	      query: {
+	        id: resp.data.result.id,
+	        shopname: resp.data.result.shopname,
+	        shopinfo: resp.data.result.shopinfo,
+	        shopimg: resp.data.result.shopimg,
+	        shopaddress: resp.data.result.shopaddress,
+	        shopstatus: resp.data.result.shopstatus,
+	      },
+	    });
+	    console.log(resp);
+	  }).catch(resp => {
+	
+	  });
+	},  onSubmit: function(row) {
+      var data = {
+        shopId: row.id
+      }
+      var url = this.axios.urls.Shop;
+      this.axios.post(url, data).then(resp => {
+        this.$router.push({
+          path: "/Shop",
+          query: {
+            id: resp.data.result.id,
+            shopname: resp.data.result.shopname,
+            shopinfo: resp.data.result.shopinfo,
+            shopimg: resp.data.result.shopimg,
+            shopaddress: resp.data.result.shopaddress,
+            shopstatus: resp.data.result.shopstatus,
+          },
+        });
+        console.log(resp);
+      }).catch(resp => {
+
+      });
+    },
     created: function() {
       var data = {
         shopId: this.$route.query.id,

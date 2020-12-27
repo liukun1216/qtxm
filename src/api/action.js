@@ -15,6 +15,8 @@ export default {
   'COMMODITY_ADD_UP':'/commodity/AddAndUp',//新增和修改
   'COMMODITY_DEL':'/commodity/Del',//删除
   'COMMODITY_LIST':'/commodity/List',//查询
+  'COMMODITY_SELECT':'/commodity/spxq',//查询单个
+
 
 
 

@@ -77,18 +77,24 @@
       <el-divider></el-divider>
       <!-- 下 -->
       <el-footer>
-<div class="" id="box">
-      <ul>
-        <li v-for="v in commodityTable">
-          <div>
+        <div class="" id="box">
+          <ul>
+            <li v-for="v in commodityTable">
+              <div>
 
-          <img v-bind:src="v.image" alt="">
-          <h4><el-link :underline="false" @click="spxq(v.id)">{{v.name}}</el-link> </h4>
-          <p>{{v.price}}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+                <img v-bind:src="v.image" alt="">
+                <h4>
+                  <el-link :underline="false" @click="spxq(v.id)">{{v.name}}</el-link>
+                </h4>
+                <p>{{v.price}}</p>
+                <!-- <el-link @click="link()" target="_blank">商品详情</el-link> -->
+                <router-link target="_blank" :to="{path:'sys/img',query:{id:1}}">查看</router-link>
+                <router-link target="_blank" :to="{path:'/spxq',query:{id:1}}">详情</router-link>
+
+              </div>
+            </li>
+          </ul>
+        </div>
       </el-footer>
     </el-container>
 
@@ -103,11 +109,12 @@
   export default {
     data() {
       return {
+        id: '',
         activeIndex: '1',
         activeIndex2: '1',
         a: true,
         b: false,
-        commodityTable:[],
+        commodityTable: [],
         username: this.$route.query.username,
          account:'',
         imagesbox: [{
@@ -151,6 +158,11 @@
         }
 
       },
+      /* link(){
+        this.$router.push({
+          path:'/spxq'
+        })
+      }, */
       shop: function() {
         if (false == this.a) {
           this.$router.push({
@@ -175,7 +187,7 @@
 
         var url = this.axios.urls.COMMODITY_LIST;
         this.axios.post(url).then(resp => {
-          this. commodityTable=resp.data.result;
+          this.commodityTable = resp.data.result;
 
           console.log(resp);
 
@@ -192,6 +204,30 @@
 
 
     },
+    spxq: function() {
+      var data = {
+        id: id,
+      }
+      var url = this.axios.urls.commodity;
+      this.axios.post(url, data).then(resp => {
+        this.$router.push({
+          path: "/spxq",
+          query: {
+            id: resp.data.result.id,
+            name: resp.data.result.name,
+            price: resp.data.result.price,
+            imgage: resp.data.result.image,
+          },
+        });
+        console.log(resp);
+      }).catch(resp => {
+        console.log(resp);
+      });
+      console.log(id);
+    },
+
+
+
     created: function() {
       this.sp();
       if (undefined != this.$route.query.username) {
@@ -229,6 +265,7 @@
     line-height: 300px;
     margin: 0;
   }
+
   #box ul {
     display: flex;
     flex-wrap: wrap;
