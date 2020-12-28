@@ -34,6 +34,8 @@ export default {
   'addCar':'/shoping/add',//加入购物车
   'Comorder_tj':'/comorder/ddtj',//订单提交
 
+   'COMMDI_CHASYOU':'/comorder/sele',//查询
+   'COMMDI_SHANCHU':'/comorder/dele',//删除
 
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
     return this.SERVER + this[k];

@@ -31,7 +31,7 @@
           <el-submenu index="5" style="margin-left: 800px;">
             <template slot="title">我的地狗</template>
             <el-menu-item index="2-1" @click="Personal">个人中心</el-menu-item>
-            <el-menu-item index="2-2">我的订单</el-menu-item>
+            <el-menu-item index="2-2" @click="tiao">我的订单</el-menu-item>
           </el-submenu>
 
           <el-menu-item index="6">
@@ -81,10 +81,6 @@
       </el-footer>
     </el-container>
 
-
-
-
-
   </div>
 </template>
 
@@ -113,7 +109,8 @@
             id: 3,
             idView: require("@/IMG/4.png")
           }
-        ]
+        ],
+
       }
     },
     methods: {
@@ -157,10 +154,12 @@
         this.b = false;
         this.$route.query.username = null;
 
+      },
+
+      // 跳转
+      tiao :function(){
+        this.$router.push("/commdord/CommdityOrder")
       }
-
-
-
 
     },
     created: function() {

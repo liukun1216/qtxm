@@ -8,6 +8,7 @@ import Register from '@/views/Register.vue'
 import Personal from '@/views/Personal.vue'
 
 
+
 //管理员主页嵌套
 import ookk from '@/views/ookk.vue'
 import test from '@/views/test.vue'
@@ -37,7 +38,8 @@ import AdminShop from '@/views/admin/Shop.vue'
 import AddShop from '@/views/shop/addShop.vue'
 import Shop from '@/views/shop/Shop.vue'
 import ShopTest from '@/views/shop/test.vue'
-
+//dingdan
+import CommdityOrder from '@/views/commdord/CommdityOrder.vue'
 
 
 Vue.use(Router)
@@ -74,6 +76,8 @@ export default new Router({
          name: 'Personal',
          component: Personal
        },
+
+
        {
          path: '/user',
          name: 'user',
@@ -104,7 +108,6 @@ export default new Router({
          component: ShopTest
 
        },
-
 
     {
       path: '/',
@@ -165,9 +168,14 @@ export default new Router({
           name: 'AddShop',
           component: AddShop
         },{
-          path: '/Shop',
+          path: '/Shop', 
           name: 'Shop',
           component: Shop
+        },
+        {
+          path: 'commdord/CommdityOrder',
+          name: 'CommdityOrder',
+          component: CommdityOrder
         },
         ]}
 

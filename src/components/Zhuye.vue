@@ -33,6 +33,10 @@
       <el-menu-item index="/AddShop">AddShop</el-menu-item>
       <el-menu-item index="/Shop">Shop</el-menu-item>
     </el-submenu>
+    <el-submenu index="2-7">
+      <template slot="title">订单管理</template>
+      <el-menu-item index="/commdord/CommdityOrder">CommdityOrder</el-menu-item>
+    </el-submenu>
 
 
   </el-menu>
