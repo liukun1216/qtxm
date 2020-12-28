@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div>
     <el-container>
       <!-- 上 -->
@@ -77,7 +77,24 @@
       <el-divider></el-divider>
       <!-- 下 -->
       <el-footer>
+        <div class="" id="box">
+          <ul>
+            <li v-for="v in commodityTable">
+              <div>
 
+                <img v-bind:src="v.image" alt="">
+                <h4>
+                  <el-link :underline="false" @click="spxq(v.id)">{{v.name}}</el-link>
+                </h4>
+                <p>{{v.price}}</p>
+                <!-- <el-link @click="link()" target="_blank">商品详情</el-link> -->
+                <router-link target="_blank" :to="{path:'sys/img',query:{id:1}}">查看</router-link>
+                <router-link target="_blank" :to="{path:'/spxq',query:{id:1}}">详情</router-link>
+
+              </div>
+            </li>
+          </ul>
+        </div>
       </el-footer>
     </el-container>
 
@@ -88,11 +105,14 @@
   export default {
     data() {
       return {
+        id: '',
         activeIndex: '1',
         activeIndex2: '1',
         a: true,
         b: false,
+        commodityTable: [],
         username: this.$route.query.username,
+         account:'',
         imagesbox: [{
             id: 0,
             idView: require("@/IMG/1.png")
@@ -135,6 +155,11 @@
         }
 
       },
+      /* link(){
+        this.$router.push({
+          path:'/spxq'
+        })
+      }, */
       shop: function() {
         if (false == this.a) {
           this.$router.push({
@@ -155,6 +180,24 @@
         this.$route.query.username = null;
 
       },
+      sp: function() {
+
+        var url = this.axios.urls.COMMODITY_LIST;
+        this.axios.post(url).then(resp => {
+          this.commodityTable = resp.data.result;
+
+          console.log(resp);
+
+
+
+
+        }).catch(resp => {
+          console.log(resp);
+        });
+        console.log(123);
+      }
+
+
 
       // 跳转
       tiao :function(){
@@ -162,8 +205,49 @@
       }
 
     },
+    spxq: function() {
+      var data = {
+        id: id,
+      }
+      var url = this.axios.urls.commodity;
+      this.axios.post(url, data).then(resp => {
+        this.$router.push({
+          path: "/spxq",
+          query: {
+            id: resp.data.result.id,
+            name: resp.data.result.name,
+            price: resp.data.result.price,
+            imgage: resp.data.result.image,
+          },
+        });
+        console.log(resp);
+      }).catch(resp => {
+        console.log(resp);
+      });
+      console.log(id);
+    },
+
+
+
     created: function() {
+      this.sp();
       if (undefined != this.$route.query.username) {
+        this.a = false;
+        this.b = true;
+      }
+      if(undefined!=sessionStorage.getItem("username")){
+        debugger
+        this.username=sessionStorage.getItem("username");
+        this.account=sessionStorage.getItem("account");
+        // sessionStorage.removeItem("username");
+        //  sessionStorage.removeItem("account");
+        this.$router.push({
+          path: "/Idex",
+          query: {
+            username:this.username,
+            account:this.account,
+          },
+        });
         this.a = false;
         this.b = true;
       }
@@ -181,5 +265,22 @@
     opacity: 0.75;
     line-height: 300px;
     margin: 0;
+  }
+
+  #box ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #box li {
+    padding: 3px;
+    list-style: none;
+    margin-right: 15px;
+    border: 1px solid #eee;
+  }
+
+  #box img {
+    width: 200px;
+    height: 150px;
   }
 </style>

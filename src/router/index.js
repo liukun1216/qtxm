@@ -20,6 +20,8 @@ import rili from '@/views/sys/rili.vue'
 import bz from '@/views/sys/bz.vue'
 import img from '@/views/sys/img.vue'
 import addprod from '@/views/sys/addprod.vue'
+import AdminUser from '@/views/admin/User.vue'
+
 
 
 
@@ -33,6 +35,8 @@ import address from '@/views/address.vue'
 import AdminLogin from '@/views/admin/Login.vue'
 import Log from '@/views/admin/Log.vue'
 import AdminShop from '@/views/admin/Shop.vue'
+import dshShop from '@/views/admin/dshShop.vue'
+
 
 //店铺模块
 import AddShop from '@/views/shop/addShop.vue'
@@ -40,6 +44,8 @@ import Shop from '@/views/shop/Shop.vue'
 import ShopTest from '@/views/shop/test.vue'
 //dingdan
 import CommdityOrder from '@/views/commdord/CommdityOrder.vue'
+import spxq from '@/views/shop/spxq.vue'
+
 
 
 Vue.use(Router)
@@ -123,41 +129,45 @@ export default new Router({
           path: 'sys/Centre',
           name: 'Centre',
           component: Centre
+      routes: [{
+          path: '/',
+          name: 'Idex',
+          component: Idex
         },
         {
-          path: 'sys/Change',
-          name: 'Change',
-          component: Change
+          path: '/Login',
+          name: 'Login',
+          component: Login
         },
         {
-          path: 'sys/rili',
-          name: 'rili',
-          component: rili
+          path: '/Idex',
+          name: 'Idex',
+          component: Idex
         },
         {
-          path: 'sys/img',
-          name: 'img',
-          component: img
+          path: '/Register',
+          name: 'Register',
+          component: Register
         },
         {
-          path: 'sys/addprod',
-          name: 'addprod',
-          component: addprod
+          path: '/Personal',
+          name: 'Personal',
+          component: Personal
         },
         {
-          path: 'sys/bz',
-          name: 'bz',
-          component: bz
+          path: '/user',
+          name: 'user',
+          component: user
         },
         {
-          path: '/test',
-          name: 'test',
-          component: test
+          path: '/AdminLogin',
+          name: 'AdminLogin',
+          component: AdminLogin
         },
         {
-          path: '/ookk',
-          name: 'ookk',
-          component: ookk,
+          path: '/Shopping',
+          name: 'Shopping',
+          component: Shopping
         },
         {
           path: '/AdminShop',
@@ -168,7 +178,7 @@ export default new Router({
           name: 'AddShop',
           component: AddShop
         },{
-          path: '/Shop', 
+          path: '/Shop',
           name: 'Shop',
           component: Shop
         },
@@ -184,3 +194,158 @@ export default new Router({
 
 
 })
+          path: '/address',
+          name: 'address',
+          component: address
+        },
+           {
+            path: '/AppMain',
+            name: 'AppMain',
+            component: AppMain,
+          },
+          {
+            path: '/idex',
+            name: 'Idex',
+            component: Idex
+          },
+          {
+            path: '/Login',
+            name: 'Login',
+            component: Login
+          },
+          {
+            path: '/',
+            name: 'Idex',
+            component: Idex
+          },
+          {
+            path: '/Register',
+            name: 'Register',
+            component: Register
+          },
+          {
+            path: '/Personal',
+            name: 'Personal',
+            component: Personal
+          },
+          {
+            path: '/user',
+            name: 'user',
+            component: user
+          },
+          {
+            path: '/AdminLogin',
+            name: 'AdminLogin',
+            component: AdminLogin
+          },
+          {
+            path: '/Shopping',
+            name: 'Shopping',
+            component: Shopping
+          },
+          {
+            path: '/address',
+            name: 'address',
+            component: address
+          },
+          {
+            path: '/Log',
+            name: 'Log',
+            component: Log
+          },
+          {
+            path: '/ShopTest',
+            name: 'ShopTset',
+            component: ShopTest
+
+          },
+
+
+          {
+            path: '/',
+            name: 'AppMain',
+            component: AppMain,
+            children: [{
+                path: 'sys/User',
+                name: 'User',
+                component: User
+              },
+              {
+                path: 'sys/Centre',
+                name: 'Centre',
+                component: Centre
+              },
+              {
+                path: 'sys/Change',
+                name: 'Change',
+                component: Change
+              },
+              {
+                path: 'sys/rili',
+                name: 'rili',
+                component: rili
+              },
+              {
+                path: 'sys/img',
+                name: 'img',
+                component: img
+              },
+              {
+                path: 'sys/addprod',
+                name: 'addprod',
+                component: addprod
+              },
+              {
+                path: 'sys/bz',
+                name: 'bz',
+                component: bz
+              },
+              {
+                path: '/test',
+                name: 'test',
+                component: test
+              },
+
+              {
+                path: '/ookk',
+                name: 'ookk',
+                component: ookk,
+              },
+              {
+                path: '/AdminShop',
+                name: 'AdminShop',
+                component: AdminShop
+              },
+              {
+                path: '/dshShop',
+                name: 'dshShop',
+                component: dshShop
+              },
+              {
+                path: '/AddShop',
+                name: 'AddShop',
+                component: AddShop
+              },
+              {
+                path: '/Shop',
+                name: 'Shop',
+                component: Shop
+              },
+              {
+                path: '/spxq',
+                name: 'spxq',
+                component: spxq
+              },
+              {
+                path: '/AdminUser',
+                name:'AdminUser',
+                component: AdminUser
+              },
+            ]
+          }
+
+        ]
+
+
+
+      })

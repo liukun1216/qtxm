@@ -3,20 +3,21 @@
     <el-header>
       <top></top>
     </el-header>
-    <div align="center" >
-      <el-form ref="form" :model="form" label-width="90px">
+    <div align="center">
+      <el-form ref="form" :model="form" label-width="100px" :rules="rules">
         <el-form-item label="地址" prop="location" style="width: 400px;">
-          <el-cascader :v-model="form.location" :options="options" ref="cascaderDay" @change="abc" style="width: 300px;">
+          <el-cascader :v-model="form.location" :options="options" ref="cascaderDay" @change="abc" style="width: 300px;"
+            plplaceholder="请选择/省/市/区">
           </el-cascader>
         </el-form-item>
         <el-form-item label="详细地址" prop="address" style="width: 400px;">
-          <el-input v-model="form.address"></el-input>
+          <el-input v-model="form.address" placeholder="请输入详细地址信息,如道路、门牌号、小区、楼栋号、单元信息"></el-input>
         </el-form-item>
         <el-form-item label="收货人姓名" prop="addressname" style="width: 400px;">
-          <el-input v-model="form.addressname"></el-input>
+          <el-input v-model="form.addressname" placeholder="长度不超过25个字符"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="phone" style="width: 400px;">
-          <el-input v-model="form.phone"></el-input>
+          <el-input v-model="form.phone" placeholder="电话号码、手机号码必须填一项"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -56,69 +57,115 @@
 
 <script>
   import top from '@/components/top.vue'
-  import {provinceAndCityData, regionData, CodeToText} from 'element-china-area-data'
+  import {
+    provinceAndCityData,
+    regionData,
+    CodeToText
+  } from 'element-china-area-data'
   export default {
     data() {
+      var checkphone = (rule, value, callback) => {
+        // let phoneReg = /(^1[3|4|5|6|7|8|9]\d{9}$)|(^09\d{8}$)/;
+        if (value == "") {
+          callback(new Error("请输入手机号"));
+        } else if (!this.isCellPhone(value)) { //引入methods中封装的检查手机格式的方法
+          callback(new Error("请输入正确的手机号!"));
+        } else {
+          callback();
+        }
+      };
       return {
-        a:true,
-        b:false,
+        area:{
+          zipCode:''
+        },
+
+        a: true,
+        b: false,
         moren: '',
         listaddress: [],
         form: {
-          id:'',
+          id: '',
           userid: '',
-          address: '',
-          addressname: '',
+          address: 'aa',
+          addressname: 'aaa',
           location: '',
-          phone: ''
+          phone: '15367262085'
 
         },
         options: regionData,
+        rules: {
 
+          phone: [{
+            required: true,
+            validator: checkphone,
+            trigger: "blur"
+          }],
+
+          address: [{
+            required: true,
+            message: '请输入详细地址',
+            trigger: 'change'
+          }],
+          addressname: [{
+            required: true,
+            message: '请输入收货人姓名',
+            trigger: 'change'
+          }, {
+            max: 25,
+            message: '长度在25个字符之内',
+            trigger: 'blur'
+          }],
+        }
 
       }
     },
     components: { //2.注册组件
-    	top
+      top
     },
     methods: {
-      toindex:function(){
+      toindex: function() {
         this.$router.push({
-          path:"/Idex",
-          query:{
-            username:this.$route.query.username,
-            account:this.$route.query.account
+          path: "/Idex",
+          query: {
+            username: this.$route.query.username,
+            account: this.$route.query.account
           }
         });
       },
-      out:function(){
-        this.a=true;
-        this.b=false;
+      out: function() {
+        this.a = true;
+        this.b = false;
         this.resetForm();
       },
       //调用修改方法修改获取的收货地址
-      updaddress:function(){
-
-       var url= this.axios.urls.SYS_ADDRESS_UPD_ID;
-        this.axios.post(url,this.form).then(resp=>{
-          console.log(resp);
-          this.a=true;
-          this.b=false;
-          this.resetForm();
-        }).catch(resp=>{
-          console.log(resp);
+      updaddress: function() {
+        this.$refs["form"].validate((valid) => {
+          if (valid) {
+           var url = this.axios.urls.SYS_ADDRESS_UPD_ID;
+           this.axios.post(url, this.form).then(resp => {
+             console.log(resp);
+             this.a = true;
+             this.b = false;
+             this.resetForm();
+             this.listbyaccount();
+           }).catch(resp => {
+             console.log(resp);
+           });
+          }else{
+            return false;
+          }
         });
       },
       //获取要修改的地址数据给input框赋值
-      getting:function(row){
+      getting: function(row) {
         this.form.id = row.id;
         this.form.userid = row.userid;
         this.form.address = row.address;
         this.form.addressname = row.addressname;
         this.form.location = row.location;
-        this.form. phone = row.phone;
-        this.a= false;
-        this.b= true;
+        this.form.phone = row.phone;
+        this.a = false;
+        this.b = true;
 
       },
       //通过地址表id删除地址
@@ -145,18 +192,26 @@
       },
       //新增收货地址
       Addaddress: function() {
-        var url = this.axios.urls.SYS_ADDRESS_ADD;
-        this.axios.post(url, this.form).then(resp => {
-          this.resetForm();
-          this.$message({
-            message: '地址新增成功',
-            type: 'success'
-          });
-          this.listbyaccount();
-        }).catch(resp => {
-          console.log(resp);
-        });
 
+        this.$refs["form"].validate((valid) => {
+          if (valid) {
+            var url = this.axios.urls.SYS_ADDRESS_ADD;
+            debugger
+            console.log(this.form.location);
+            this.axios.post(url, this.form).then(resp => {
+              this.resetForm();
+              this.$message({
+                message: '地址新增成功',
+                type: 'success'
+              });
+              this.listbyaccount();
+            }).catch(resp => {
+              console.log(resp);
+            });
+          }else{
+            return false;
+          }
+        });
       },
 
       //通过用户账号查询用户获得用户id
@@ -186,29 +241,47 @@
           console.log(resp);
         });
       },
-      //级连下拉菜单获取收货地区
+      //级联下拉菜单获取收货地区
+      listbycode:function(){
+        var url = this.axios.urls.SYS_AREA_LISTBYCODE;
+        this.axios.post(url,this.area).then(resp=>{
+          this.form.location = resp.data.result.mergerName;
+           console.log(this.form.location);
+        }).catch(resp=>{
+
+        });
+      },
       abc: function(val) {
-        var labelList = [];
-        var checkLabels = this.$refs['cascaderDay'].getCheckedNodes()[0].pathLabels;
-        checkLabels.forEach(function(item) {
-          if (!item.hasChildren) {
-            labelList.push(item.label);
-          }
-        })
-        // this.form.dayWorkerLocation = nowData.join(",");
-        // this.form.dayWorker = labelList.join(",");
-        this.form.location = labelList.join(",");
+        let num = val.length;
+        let code = val[num-1];
+        this.area.zipCode = code;
+        this.listbycode();
+
+        // var labelList = [];
+        // var checkLabels = this.$refs['cascaderDay'].getCheckedNodes()[0].pathLabels;
+        // checkLabels.forEach(function(val) {
+        //   this.form.location = val[0];
+        // })
+
+
         console.log(val);
       },
       //表单清空
       resetForm: function() {
         this.$refs["form"].resetFields();
+      },
+      isCellPhone(val) {
+        if (!/^1(3|4|5|6|7|8)\d{9}$/.test(val)) {
+          return false;
+        } else {
+          return true;
+        }
       }
     },
     //初始化数据
     created: function() {
       this.listbyaccount();
-      this.selectedOptions=["440000","440100"];
+      this.selectedOptions = ["440000", "440100"];
     }
   }
 </script>
